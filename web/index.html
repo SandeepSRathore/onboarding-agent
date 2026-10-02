@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onboarding Buddy</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" integrity="sha384-948ahk4ZmxYVYOc+rxN1H2gM1EJ2Duhp7uHtZ4WSLkV4Vtx5MUqnV+l7u9B+jFv+" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js" integrity="sha384-a7SzOxErzJ3ZpQz0zJ32d67dSitNzPcbfybc/ykU9KJhMgZkwqfSxlhhdJRS+XGL" crossorigin="anonymous" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <section id="setup" class="setup" hidden>
+    <form id="setup-form" class="card">
+      <h1>Welcome to Nimbus Labs 👋</h1>
+      <p class="muted">I'm your Onboarding Buddy. Tell me a little about yourself so I can guide you.</p>
+      <label>Your name <input name="name" required maxlength="100" autocomplete="name"></label>
+      <label>Role <input name="role" value="Software Engineer" required maxlength="100"></label>
+      <label>Team
+        <select name="team" required>
+          <option>Platform</option>
+          <option>Growth</option>
+          <option>Integrations</option>
+        </select>
+      </label>
+      <label>Start date <input name="start_date" type="date" required></label>
+      <button type="submit">Start onboarding</button>
+      <p id="setup-error" class="error" hidden></p>
+    </form>
+  </section>
+
+  <main id="app" class="app" hidden>
+    <aside class="sidebar">
+      <h2 id="greeting"></h2>
+      <p id="day-label" class="muted"></p>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <p id="progress-label" class="muted"></p>
+      <div id="checklist"></div>
+    </aside>
+    <section class="chat">
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <div id="suggestions" class="suggestions"></div>
+      <form id="chat-form" class="composer">
+        <textarea id="chat-input" rows="1" maxlength="4000" placeholder="Ask anything about onboarding…" aria-label="Message"></textarea>
+        <button type="submit" id="send">Send</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
