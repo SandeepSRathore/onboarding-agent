@@ -46,7 +46,9 @@ function addMessage(kind, text, sources = []) {
     bubble.append(row);
   }
   $("#messages").append(bubble);
-  bubble.scrollIntoView({ block: "end", behavior: "smooth" });
+  // Show answers from their first line (they can be long); keep everything else pinned to the bottom.
+  if (kind === "assistant") bubble.scrollIntoView({ block: "start" });
+  else $("#messages").scrollTop = $("#messages").scrollHeight;
   return bubble;
 }
 

@@ -54,7 +54,8 @@ button:disabled { opacity: 0.6; cursor: wait; }
 .card label { display: grid; gap: 6px; font-size: 0.9rem; color: var(--muted); }
 
 /* Main layout: checklist sidebar + chat */
-.app { display: grid; grid-template-columns: 300px 1fr; height: 100dvh; }
+/* minmax(0, 1fr) caps the row at the viewport so only .messages scrolls, not the whole page */
+.app { display: grid; grid-template-columns: 300px 1fr; grid-template-rows: minmax(0, 1fr); height: 100dvh; }
 .sidebar { background: var(--panel); border-right: 1px solid var(--border); padding: 20px; overflow-y: auto; }
 .sidebar h2 { margin: 0 0 4px; font-size: 1.2rem; }
 .sidebar h3 {
@@ -97,7 +98,7 @@ button:disabled { opacity: 0.6; cursor: wait; }
 .composer textarea { flex: 1; resize: none; min-height: 44px; max-height: 160px; }
 
 @media (max-width: 760px) {
-  .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .app { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
   .sidebar { border-right: 0; border-bottom: 1px solid var(--border); max-height: 35dvh; padding: 16px; }
   .messages, .composer { padding: 16px; }
   .suggestions { padding: 0 16px 12px; }
