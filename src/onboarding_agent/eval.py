@@ -2,9 +2,8 @@
 import sys
 
 import yaml
-from openai import OpenAI
 
-from .config import PROJECT_ROOT, load_settings, require_api_key
+from .config import PROJECT_ROOT, load_settings, openai_client
 from .embeddings import openai_embedder
 from .retriever import Retriever
 
@@ -23,7 +22,7 @@ def evaluate(retriever: Retriever, cases: list[dict], k: int = 4) -> tuple[float
 
 def main() -> None:
     settings = load_settings()
-    client = OpenAI(api_key=require_api_key(settings))
+    client = openai_client(settings)
     retriever = Retriever.load(settings.index_dir, openai_embedder(client, settings.embed_model))
     cases = yaml.safe_load((PROJECT_ROOT / "evals" / "golden.yaml").read_text(encoding="utf-8"))["cases"]
     rate, rows = evaluate(retriever, cases)

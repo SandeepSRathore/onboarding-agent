@@ -4,8 +4,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from dotenv import load_dotenv
+from openai import OpenAI
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OPENAI_TIMEOUT_SECONDS = 60
 
 
 @dataclass(frozen=True)
@@ -43,3 +45,8 @@ def require_api_key(settings: Settings) -> str:
     if not settings.openai_api_key:
         raise SystemExit("OPENAI_API_KEY is not set. Copy .env.example to .env and add your key.")
     return settings.openai_api_key
+
+
+def openai_client(settings: Settings) -> OpenAI:
+    """A client that gives up after a minute (one retry) so a stalled API call surfaces as an error."""
+    return OpenAI(api_key=require_api_key(settings), timeout=OPENAI_TIMEOUT_SECONDS, max_retries=1)

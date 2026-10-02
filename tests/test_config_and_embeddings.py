@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from onboarding_agent.config import PROJECT_ROOT, load_settings, require_api_key
+from onboarding_agent.config import OPENAI_TIMEOUT_SECONDS, PROJECT_ROOT, load_settings, openai_client, require_api_key
 from onboarding_agent.embeddings import normalize, openai_embedder
 
 
@@ -50,3 +50,10 @@ def test_openai_embedder_batches_and_keeps_input_order():
     assert calls == [["a", "bb"], ["ccc"]]
     assert out[:, 0].tolist() == [1.0, 2.0, 3.0]
     assert out.dtype == np.float32
+
+
+def test_openai_client_fails_fast_instead_of_hanging():
+    settings = dataclasses.replace(load_settings(), openai_api_key="sk-test")
+    client = openai_client(settings)
+    assert client.timeout == OPENAI_TIMEOUT_SECONDS == 60
+    assert client.max_retries == 1

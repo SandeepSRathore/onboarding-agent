@@ -1,6 +1,7 @@
+import httpx
 import pytest
 from fastapi.testclient import TestClient
-from openai import OpenAIError
+from openai import AuthenticationError, OpenAIError
 
 from fakes import TODAY, FakeOpenAI, completion, tool_call
 from onboarding_agent.agent import Agent
@@ -81,3 +82,13 @@ def test_serves_web_ui(make_http, tmp_path):
     http = make_http(web_dir=tmp_path)
     assert "Onboarding Buddy" in http.get("/").text
     assert http.get("/api/employee").status_code == 200  # API routes still win over static files
+
+
+def test_bad_api_key_says_how_to_fix_it(make_http):
+    response_401 = httpx.Response(401, request=httpx.Request("POST", "https://api.openai.com/v1/chat/completions"))
+    http = make_http([AuthenticationError("Incorrect API key provided", response=response_401, body=None)])
+    http.post("/api/employee", json=PROFILE)
+    response = http.post("/api/chat", json={"message": "hi"})
+    assert response.status_code == 502
+    assert "OPENAI_API_KEY" in response.json()["detail"]
+    assert "try again" not in response.json()["detail"]

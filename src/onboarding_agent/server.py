@@ -6,11 +6,11 @@ from pathlib import Path
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from openai import OpenAI, OpenAIError
+from openai import AuthenticationError, OpenAIError
 from pydantic import BaseModel, ConfigDict, Field
 
 from .agent import Agent
-from .config import load_settings, require_api_key
+from .config import load_settings, openai_client
 from .embeddings import openai_embedder
 from .retriever import IndexNotFoundError, Retriever
 from .store import Employee, Store
@@ -67,6 +67,8 @@ def create_app(agent: Agent, store: Store, toolbox: Toolbox, web_dir: Path | Non
             raise HTTPException(409, "Please set up your profile first.")
         try:
             reply = agent.chat(body.message)
+        except AuthenticationError as exc:
+            raise HTTPException(502, "OpenAI rejected the API key. Check OPENAI_API_KEY in .env and restart the server.") from exc
         except OpenAIError as exc:
             raise HTTPException(502, f"The AI service failed ({type(exc).__name__}). Please try again.") from exc
         return {"reply": reply.text, "sources": reply.sources}
@@ -78,7 +80,7 @@ def create_app(agent: Agent, store: Store, toolbox: Toolbox, web_dir: Path | Non
 
 def build_default_app() -> FastAPI:
     settings = load_settings()
-    client = OpenAI(api_key=require_api_key(settings))
+    client = openai_client(settings)
     retriever = Retriever.load(settings.index_dir, openai_embedder(client, settings.embed_model))
     store = Store(settings.db_path)
     toolbox = Toolbox(

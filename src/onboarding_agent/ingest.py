@@ -5,9 +5,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import numpy as np
-from openai import OpenAI
 
-from .config import load_settings, require_api_key
+from .config import load_settings, openai_client
 from .embeddings import Embed, openai_embedder
 
 HEADING = re.compile(r"^(#{1,3})\s+(.+?)\s*#*\s*$")
@@ -101,7 +100,7 @@ def build_index(kb_dir: Path, index_dir: Path, embed: Embed) -> list[Chunk]:
 
 def main() -> None:
     settings = load_settings()
-    client = OpenAI(api_key=require_api_key(settings))
+    client = openai_client(settings)
     chunks = build_index(settings.kb_dir, settings.index_dir, openai_embedder(client, settings.embed_model))
     doc_count = len({chunk.doc_id for chunk in chunks})
     print(f"Indexed {len(chunks)} chunks from {doc_count} docs → {settings.index_dir}")
