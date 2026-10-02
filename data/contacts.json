@@ -1,0 +1,18 @@
+[
+  {"name": "Arjun Mehta", "role": "Onboarding Buddy (Senior Software Engineer, Platform)", "channel": "Slack @arjun.mehta",
+   "topics": ["onboarding", "buddy", "codebase", "code", "questions", "help", "pr", "review", "setup", "stuck"]},
+  {"name": "Priya Sharma", "role": "Engineering Manager", "channel": "Slack @priya.sharma (weekly 1:1 on Mondays)",
+   "topics": ["manager", "goals", "checkin", "check", "performance", "feedback", "probation", "career", "team"]},
+  {"name": "IT Helpdesk", "role": "IT support", "channel": "#it-help on Slack or it@nimbuslabs.example",
+   "topics": ["laptop", "vpn", "tailscale", "okta", "password", "access", "github", "account", "accounts", "hardware", "sso", "1password", "mfa"]},
+  {"name": "Neha Kapoor", "role": "HR Business Partner", "channel": "hr@nimbuslabs.example or PeopleHub",
+   "topics": ["leave", "holidays", "holiday", "payroll", "salary", "pay", "benefits", "insurance", "policy", "documents", "probation"]},
+  {"name": "Platform Infra team", "role": "DevOps and CI/CD owners", "channel": "#devops on Slack",
+   "topics": ["deploy", "deployment", "ci", "pipeline", "aws", "staging", "production", "docker", "release", "infrastructure", "build"]},
+  {"name": "Security team", "role": "Security and compliance", "channel": "#security on Slack or security@nimbuslabs.example",
+   "topics": ["security", "phishing", "secrets", "secret", "credentials", "leak", "incident", "data", "privacy"]},
+  {"name": "On-call engineer", "role": "Current production on-call (rotates weekly)", "channel": "#incidents on Slack, page via PagerDuty",
+   "topics": ["outage", "incident", "alert", "down", "oncall", "pagerduty", "broken", "production"]},
+  {"name": "Finance team", "role": "Expenses and reimbursements", "channel": "finance@nimbuslabs.example",
+   "topics": ["expenses", "expense", "reimbursement", "travel", "invoice", "budget", "equipment"]}
+]

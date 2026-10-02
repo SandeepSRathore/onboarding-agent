@@ -1,0 +1,16 @@
+tasks:
+  - {id: accounts, week: 1, title: "Sign in to Okta, Google Workspace and Slack", doc_ref: 05-tools-and-access}
+  - {id: meet-buddy, week: 1, title: "Meet your onboarding buddy and manager", doc_ref: 00-welcome}
+  - {id: peoplehub-profile, week: 1, title: "Complete your PeopleHub profile and payroll details", doc_ref: 06-hr-policies}
+  - {id: github-access, week: 1, title: "Get access to the nimbus GitHub organization", doc_ref: 05-tools-and-access}
+  - {id: vpn, week: 1, title: "Install and connect to the Tailscale VPN", doc_ref: 05-tools-and-access}
+  - {id: dev-environment, week: 1, title: "Set up your development environment", doc_ref: 01-dev-environment-setup}
+  - {id: run-locally, week: 1, title: "Run flow-api and flow-web locally", doc_ref: 01-dev-environment-setup}
+  - {id: read-workflow, week: 1, title: "Read the engineering workflow (branches, PRs, reviews)", doc_ref: 02-engineering-workflow}
+  - {id: read-architecture, week: 2, title: "Read the architecture overview", doc_ref: 04-architecture-overview}
+  - {id: coding-standards, week: 2, title: "Read the coding standards and install pre-commit hooks", doc_ref: 03-coding-standards}
+  - {id: first-pr, week: 2, title: "Ship your first PR (a good-first-issue ticket)", doc_ref: 02-engineering-workflow}
+  - {id: first-ticket, week: 3, title: "Pick up your first sprint ticket", doc_ref: 07-first-90-days}
+  - {id: review-prs, week: 3, title: "Review two teammates' pull requests", doc_ref: 02-engineering-workflow}
+  - {id: watch-release, week: 4, title: "Watch a release-train deploy to production", doc_ref: 02-engineering-workflow}
+  - {id: day30-checkin, week: 4, title: "Prepare for your 30-day check-in", doc_ref: 07-first-90-days}

@@ -1,0 +1,15 @@
+cases:
+  - {question: "How do I set up my laptop for development?", expect_doc: 01-dev-environment-setup}
+  - {question: "Which command starts the backend locally?", expect_doc: 01-dev-environment-setup}
+  - {question: "What should I name my git branch?", expect_doc: 02-engineering-workflow}
+  - {question: "How many approvals does a pull request need?", expect_doc: 02-engineering-workflow}
+  - {question: "When do production deploys happen?", expect_doc: 02-engineering-workflow}
+  - {question: "What linter and formatter do we use for Python?", expect_doc: 03-coding-standards}
+  - {question: "What database does Nimbus Flow use?", expect_doc: 04-architecture-overview}
+  - {question: "How do I get access to GitHub?", expect_doc: 05-tools-and-access}
+  - {question: "How do I connect to the VPN?", expect_doc: 05-tools-and-access}
+  - {question: "How many paid leave days do I get per year?", expect_doc: 06-hr-policies}
+  - {question: "When is salary paid each month?", expect_doc: 06-hr-policies}
+  - {question: "What is expected of me in my first 30 days?", expect_doc: 07-first-90-days}
+  - {question: "What does release train mean?", expect_doc: 08-glossary}
+  - {question: "Who is my onboarding buddy?", expect_doc: 00-welcome}
